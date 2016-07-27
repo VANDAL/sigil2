@@ -273,12 +273,19 @@ STSyncEvent::STSyncEvent(TID &tid, EID &eid, const std::shared_ptr<spdlog::logge
     , logger(logger) { }
 
 
-void STSyncEvent::flush(const STSyncType type, const Addr sync_addr)
+void STSyncEvent::flush(const STSyncType type, const Addr sync_addr, const Addr MUTEX_HOTFIX)
 {
     logmsg += std::to_string(event_id).append(",");
     logmsg += std::to_string(thread_id).append(",pth_ty:");
     logmsg += std::to_string(type).append("^");
     logmsg += n2hexstr(sync_addr);
+
+    if (type == /*condwait*/6 && MUTEX_HOTFIX != 0)
+    {
+        logmsg += "&";
+        logmsg += n2hexstr(MUTEX_HOTFIX);
+    }
+
     logger->info(logmsg);
     logmsg.clear();
     ++event_id;

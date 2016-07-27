@@ -247,6 +247,19 @@ void SGL_(log_sync)(UChar type, UWord data)
 	curr_buf[curr_used].tag = SGL_SYNC_TAG;
 	curr_buf[curr_used].sync.type = type;
 	curr_buf[curr_used].sync.id = data;
+	curr_buf[curr_used].sync.MUTEX_HOTFIX = 0;
+
+	incr_used();
+}
+
+void SGL_(log_sync_CONDWAIT_HOTFIX)(UChar type, UWord cond, UWord mutex)
+{
+	update_curr_buf();
+
+	curr_buf[curr_used].tag = SGL_SYNC_TAG;
+	curr_buf[curr_used].sync.type = type;
+	curr_buf[curr_used].sync.id = cond;
+	curr_buf[curr_used].sync.MUTEX_HOTFIX = mutex;
 
 	incr_used();
 }

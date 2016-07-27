@@ -166,9 +166,9 @@ int I_WRAP_SONAME_FNNAME_ZZ(NONE, pthreadZucondZuwaitZa)(pthread_cond_t *cond,
     OrigFn fn;
     VALGRIND_GET_ORIG_FN(fn);
 
-    SIGIL_PTHREAD_CONDWAIT_ENTER(cond);
+    SIGIL_PTHREAD_CONDWAIT_ENTER(cond, mutex);
     CALL_FN_W_WW(ret, fn, cond, mutex);
-    SIGIL_PTHREAD_CONDWAIT_LEAVE(cond);
+    SIGIL_PTHREAD_CONDWAIT_LEAVE(cond, mutex);
 
     return ret;
 }
@@ -179,9 +179,9 @@ int I_WRAP_SONAME_FNNAME_ZZ(libpthreadZdsoZd0, pthreadZucondZuwaitZa)(pthread_co
     OrigFn fn;
     VALGRIND_GET_ORIG_FN(fn);
 
-    SIGIL_PTHREAD_CONDWAIT_ENTER(cond);
+    SIGIL_PTHREAD_CONDWAIT_ENTER(cond, mutex);
     CALL_FN_W_WW(ret, fn, cond, mutex);
-    SIGIL_PTHREAD_CONDWAIT_LEAVE(cond);
+    SIGIL_PTHREAD_CONDWAIT_LEAVE(cond, mutex);
 
     return ret;
 }

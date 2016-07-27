@@ -1468,7 +1468,7 @@ Bool CLG_(handle_client_request)(ThreadId tid, UWord *args, UWord *ret)
       SGL_(thread_in_synccall)[SGL_(active_tid)] = False;
       if ( EVENT_GENERATION_ENABLED )
       {
-         SGL_(log_sync)((UChar)SGLPRIM_SYNC_CONDWAIT, args[1]);
+         SGL_(log_sync_CONDWAIT_HOTFIX)((UChar)SGLPRIM_SYNC_CONDWAIT, args[1], args[2]);
       }
       break;
 

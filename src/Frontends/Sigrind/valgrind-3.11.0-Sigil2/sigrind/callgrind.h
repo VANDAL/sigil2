@@ -217,12 +217,12 @@ typedef
                                   bar, 0, 0, 0, 0)
 
 
-#define SIGIL_PTHREAD_CONDWAIT_ENTER(cond) \
+#define SIGIL_PTHREAD_CONDWAIT_ENTER(cond, mutex) \
   VALGRIND_DO_CLIENT_REQUEST_STMT(VG_USERREQ__SIGIL_PTHREAD_CONDWAIT_ENTER,     \
-                                  cond, 0, 0, 0, 0)
-#define SIGIL_PTHREAD_CONDWAIT_LEAVE(cond) \
+                                  cond, mutex, 0, 0, 0)
+#define SIGIL_PTHREAD_CONDWAIT_LEAVE(cond, mutex) \
   VALGRIND_DO_CLIENT_REQUEST_STMT(VG_USERREQ__SIGIL_PTHREAD_CONDWAIT_LEAVE,     \
-                                  cond, 0, 0, 0, 0)
+                                  cond, mutex, 0, 0, 0)
 
 
 #define SIGIL_PTHREAD_CONDSIG_ENTER(cond) \

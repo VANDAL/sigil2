@@ -78,6 +78,7 @@ typedef struct BufferedSglEv BufferedSglEv;
     {
         SyncType      type;
         SyncID        id;
+        SyncID        MUTEX_HOTFIX;
     };
 
     struct BufferedSglEv

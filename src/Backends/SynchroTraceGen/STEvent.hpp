@@ -317,7 +317,7 @@ class STSyncEvent
     STSyncEvent(TID &tid, EID &eid, const std::shared_ptr<spdlog::logger> &logger);
 
     /* only behavior is immediate flush */
-    void flush(const STSyncType type, const Addr sync_addr);
+    void flush(const STSyncType type, const Addr sync_addr, const Addr MUTEX_HOTFIX);
 };
 
 }; //end namespace STGen

@@ -53,6 +53,9 @@ void SGL_(log_fn_leave)(fn_node* fn);
 /* Synchronization event or thread context swap */
 void SGL_(log_sync)(UChar type, UWord data);
 
+/* XXX hotfix for logging both cond and mutex */
+void SGL_(log_sync_CONDWAIT_HOTFIX)(UChar type, UWord cond, UWord mutex);
+
 /* unimplemented */
 void SGL_(log_global_event)(InstrInfo* ii) VG_REGPARM(1);
 

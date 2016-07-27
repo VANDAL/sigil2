@@ -150,7 +150,7 @@ void EventHandlers::onSyncEv(const SglSyncEv &ev)
 
         if /*valid sync event*/(type > 0)
         {
-            st_sync_ev.flush(type, ev.id);
+            st_sync_ev.flush(type, ev.id, ev.MUTEX_HOTFIX);
         }
     }
 }
