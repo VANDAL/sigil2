@@ -337,6 +337,14 @@ void onExit()
     pthread_logger->info("Total iops: " + std::to_string(STCompEvent::iop_count_global));
     pthread_logger->info("Total flops: " + std::to_string(STCompEvent::flop_count_global));
 
+    for (auto &p : STCompEvent::op_map_global)
+    {
+        pthread_logger->info("IOPS -- Thread " + std::to_string(p.first) + " :" +
+                             std::to_string(p.second.first));
+        pthread_logger->info("FLOPS -- Thread " + std::to_string(p.first) + " :" +
+                             std::to_string(p.second.second));
+    }
+
     pthread_logger->flush();
 }
 
@@ -361,16 +369,17 @@ EventHandlers::~EventHandlers()
     st_comp_ev.flush();
     // sync events already flush immediately
 
-    for (auto &p : loggers)
+    /* update static map for print out in final pthread.out file */
+    st_comp_ev.per_thread_data.sync();
     {
-        std::string IOP_stats = "IOP_cnt: ";
-        IOP_stats.append(std::to_string(st_comp_ev.per_thread_data.getThreadIOPS(p.first)));
-
-        std::string FLOP_stats = "FLOP_cnt: ";
-        FLOP_stats.append(std::to_string(st_comp_ev.per_thread_data.getThreadFLOPS(p.first)));
-
-        p.second->info(IOP_stats);
-        p.second->info(FLOP_stats);
+        std::lock_guard<std::mutex> lock(STCompEvent::map_mutex);
+        for (auto &p : loggers)
+        {
+            auto tid = p.first;
+            auto tid_iops = st_comp_ev.per_thread_data.getThreadIOPS(tid);
+            auto tid_flops = st_comp_ev.per_thread_data.getThreadFLOPS(tid);
+            STCompEvent::op_map_global[tid] = {tid_iops, tid_flops};
+        }
     }
 
     /* close remaining logs before gzstreams close

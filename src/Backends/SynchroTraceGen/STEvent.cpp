@@ -12,6 +12,8 @@ namespace STGen
 ////////////////////////////////////////////////////////////
 decltype(STCompEvent::flop_count_global) STCompEvent::flop_count_global{0};
 decltype(STCompEvent::iop_count_global) STCompEvent::iop_count_global{0};
+decltype(STCompEvent::map_mutex) STCompEvent::map_mutex;
+decltype(STCompEvent::op_map_global) STCompEvent::op_map_global;
 
 STCompEvent::STCompEvent(TID &tid, EID &eid, const std::shared_ptr<spdlog::logger> &logger,
                          STInstrEvent &instr_ev)

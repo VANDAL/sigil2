@@ -165,6 +165,8 @@ struct STCompEvent
     /* global count over all threads */
     static std::atomic<StatCounter> flop_count_global;
     static std::atomic<StatCounter> iop_count_global;
+    static std::mutex map_mutex;
+    static std::map<TID,std::pair<StatCounter, StatCounter>> op_map_global;
 
     /* local to each thread */
     struct _per_thread_t
