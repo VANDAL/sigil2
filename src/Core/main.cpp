@@ -6,6 +6,7 @@
 #include "Backends/SynchroTraceGen/EventHandlers.hpp"
 #include "Backends/SimpleCount/Handler.hpp"
 #include "Backends/SigilClassic/Handler.hpp"
+#include "Backends/MemTrace/Handler.hpp"
 
 #ifdef PRETTY_PRINT_TITLE
 #include <iostream>
@@ -43,24 +44,19 @@ int main(int argc, char* argv[])
                           startPerfPT)
         .registerBackend("stgen",
                          {[]{return std::make_unique<::STGen::EventHandlers>();},
-                          ::STGen::onParse,
-                          ::STGen::onExit,
-                          {},})
+                          ::STGen::onParse, ::STGen::onExit, {},})
         .registerBackend("simplecount",
                          {[]{return std::make_unique<::SimpleCount::Handler>();},
-                          {},
-                          ::SimpleCount::cleanup,
-                          {},})
+                          {}, ::SimpleCount::cleanup, {},})
         .registerBackend("sigilclassic",
                          {[]{return std::make_unique<::SigilClassic::Handler>();},
-                          {},
-                          {},
-                          {},})
+                          {}, {}, {},})
+        .registerBackend("memtrace",
+                         {[]{return std::make_unique<::MemTrace::Handler>();},
+                          {}, {}, {},})
         .registerBackend("null",
                          {[]{return std::make_unique<::BackendIface>();},
-                          {},
-                          {},
-                          {},})
+                          {}, {}, {},})
         .parseCommandLine(argc, argv);
 
     return startSigil2(config);

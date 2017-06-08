@@ -83,6 +83,9 @@ target_link_libraries(sigil2 SimpleCount)
 add_subdirectory(${SRC_BACKENDS}/SigilClassic)
 target_link_libraries(sigil2 SigilClassic)
 
+add_subdirectory(${SRC_BACKENDS}/MemTrace)
+target_link_libraries(sigil2 MemTrace capnp kj)
+
 ##########################
 # Interface to Frontends #
 ##########################
