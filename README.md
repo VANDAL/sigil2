@@ -1,3 +1,8 @@
+# DEPRECATED
+
+Sigil2 has been [updated and rebranded here](https://github.com/vandal/prism).
+Apologies for the inconvenience 🙏.
+
 <p align="center">
   <img src="https://cdn.rawgit.com/VANDAL/sigil2/master/docs/sigil2-torus.png" alt="mmmmmm">
 </p>
@@ -7,6 +12,7 @@
 [![BSD licensed](https://img.shields.io/badge/license-BSD-blue.svg)](./COPYING)
 [![Build Status](https://travis-ci.org/VANDAL/sigil2.svg?branch=master)](https://travis-ci.org/VANDAL/sigil2)
 [![Docs Status](https://readthedocs.org/projects/sigil2/badge)](http://sigil2.readthedocs.io/en/latest)
+[![Deprecated](https://img.shields.io/badge/stability-deprecated-red.svg)](https://github.com/vandal/prism)
 
 Provides an extensible interface to  **architecture-agnostic** application events.
 
